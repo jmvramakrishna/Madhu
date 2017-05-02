@@ -1,0 +1,4 @@
+<apex:page standardController="Account" extensions="ActionExample">
+    Account Name : {!acc.Name} <br/>
+    Account Phone: {!acc.phone}
+</apex:page>

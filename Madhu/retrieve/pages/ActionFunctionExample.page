@@ -1,0 +1,43 @@
+<apex:page controller="ActionFunctionExample" id="page">
+    <script>
+        function jsCall(){
+            var name=document.getElementById('page:fm:pb:name').value;
+            var exp=document.getElementById('page:fm:pb:exp').value;
+            var salary;
+            if(exp > 5){
+                salary=90000;
+            }else{
+                salary=40000;
+            }
+            if(name!='' && name!=null){
+                funCall(salary);
+            }else{
+                alert('Enter Name first');
+            }
+        }
+    </script>
+    <apex:form id="fm">
+        <apex:actionFunction name="funCall" action="{!callme}" reRender="two" >
+            <apex:param name="salary" assignTo="{!salary}" value="" />
+        </apex:actionFunction>
+        <apex:pageBlock title="Action Function" id="pb">
+            Enter Name : <apex:inputText value="{!name}"   id="name"/><br/><br/>
+            Enter Exp   : <apex:inputText id="exp" /> <br/><br/>
+            Enter Branch:<apex:inputText value="{!branch}"  onchange="jsCall()" id="branch" />
+            
+            <br/><br/>  
+            Result : <apex:outputLabel value="{!result}" id="two" />
+        </apex:pageBlock>
+        <apex:pageBlock title="Action Function" >
+            Enter Name : <apex:inputText value="{!name}" />
+                
+            <br/><br/>
+            Enter Branch:<apex:inputText value="{!branch}"  >
+            <apex:actionSupport event="onchange" action="{!callme}" reRender="one" />
+            </apex:inputText>
+            <br/><br/>  
+            Result : <apex:outputLabel value="{!result}" id="one" />
+        </apex:pageBlock>
+        
+    </apex:form>
+</apex:page>
